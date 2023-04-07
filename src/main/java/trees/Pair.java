@@ -1,4 +1,4 @@
-package treeds;
+package trees;
 
 public class Pair<T,V> {
 	

@@ -1,4 +1,4 @@
-package treeds;
+package trees;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,42 +45,116 @@ public class BinaryTreeDemo {
 		// Pair<Integer, Boolean> ifCheckSum = checkSum(root);
 		// System.out.println(ifCheckSum.getValue());
 
-		zigzagPrint(root);
+		// zigzagPrint(root);
+		// printAllLeafNodes(root);
+		/*
+		 * System.out.println("Printing all left nodes without left node");
+		 * printAllLeftNodesExceptLeaf(root);
+		 * System.out.println("printing all right nodes in reverse order");
+		 * printRightNodesInReverseOrder(root);
+		 */
+
+		boundaryTraversal(root);
+	}
+
+	private static void boundaryTraversal(Node<Integer> root) {
+		List<Integer> list= new ArrayList<Integer>();
+		if(root==null) {
+			return ;
+		}
+		list.add(root.getData());
+		System.out.println("printing root node");
+		printAllLeftNodesExceptLeaf(root.getLeft(), list);
+		System.out.println("printing only left nodes");
+		System.out.println(Arrays.toString(list.toArray()));
+		printAllLeafNodes(root, list);
+		System.out.println("printing leaf nodes");
+		System.out.println(Arrays.toString(list.toArray()));
+		printRightNodesInReverseOrder(root.getRight(),list);
+		System.out.println("Printing right nodes");
+		System.out.println(Arrays.toString(list.toArray()));
+		
+	}
+
+	private static void printRightNodesInReverseOrder(Node<Integer> root2, List<Integer> list) {
+
+		if ((root2 == null) || (root2.getLeft()==null && root2.getRight()==null)) {
+			return;
+		}
+		
+		if(root2.getRight()!=null)
+		printRightNodesInReverseOrder(root2.getRight(), list);
+		else
+			printRightNodesInReverseOrder(root2.getLeft(), list);
+			
+		list.add(root2.getData());
+	}
+
+	private static void printAllLeafNodes(Node<Integer> root, List<Integer> list) {
+
+		if (root == null) {
+			return;
+		}
+		printAllLeafNodes(root.getLeft(), list);
+		printAllLeafNodes(root.getRight(), list);
+
+		if (root.getLeft() == null && root.getRight() == null)
+			list.add(root.getData());
+	}
+
+	private static void printAllLeftNodesExceptLeaf(Node<Integer> root, List<Integer> list) {
+
+		if ((root == null) || (root.getLeft()==null && root.getRight()==null)) {
+			return;
+		}
+			list.add(root.getData());
+			if(root.getLeft()!=null)
+				printAllLeftNodesExceptLeaf(root.getLeft(), list);
+			else {
+				printAllLeftNodesExceptLeaf(root.getRight(), list);
+				
+			}
+			
+		// if (root.getLeft() != null && root.getRight() == null)
 	}
 
 	private static void zigzagPrint(Node<Integer> root) {
 
 		boolean rightToLeft = false;
 		Queue<Node<Integer>> q = new LinkedList<Node<Integer>>();
+
+		if (root == null) {
+			return;
+		}
 		List<Integer> res = new ArrayList<Integer>();
 		q.add(root);
 		while (!q.isEmpty()) {
-
+			int size = q.size();
 			int[] temp = new int[q.size()];
-			for (int i = 0; i < q.size(); i++) {
+
+			for (int i = 0; i < size; i++) {
 				Node<Integer> n = q.peek();
-				int index = (!rightToLeft) ? i : q.size() - i - 1;
-				temp[index]=(n.getData());
-
 				q.remove();
-				if (n != null) {
 
-					if (n.getLeft() != null)
-						q.add(n.getLeft());
-					if (n.getRight() != null)
-						q.add(n.getRight());
+				int index = (!rightToLeft) ? i : size - i - 1;
 
-				}
+				temp[index] = (n.getData());
+
+				if (n.getLeft() != null)
+					q.add(n.getLeft());
+				if (n.getRight() != null)
+					q.add(n.getRight());
+
 			}
-			rightToLeft=!rightToLeft;
+			rightToLeft = !rightToLeft;
 
-			for(int i=0;i<temp.length;i++) {
+			for (int i = 0; i < temp.length; i++) {
 				res.add(temp[i]);
 			}
 
 		}
-		
-	System.out.println(Arrays.toString(res.toArray()));
+
+		System.out.println(Arrays.toString(res.toArray()));
 
 	}
 

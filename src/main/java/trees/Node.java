@@ -1,4 +1,4 @@
-package treeds;
+package trees;
 
 /**
  * Creating the Node for the binary tree
