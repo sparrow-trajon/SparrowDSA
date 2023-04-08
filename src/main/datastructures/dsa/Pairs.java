@@ -1,4 +1,4 @@
-package arrayquestion;
+package dsa;
 
 public class Pairs {
 

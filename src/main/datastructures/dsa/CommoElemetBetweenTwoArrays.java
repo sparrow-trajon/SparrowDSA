@@ -1,4 +1,4 @@
-package arrayquestion;
+package dsa;
 
 import java.util.HashMap;
 
