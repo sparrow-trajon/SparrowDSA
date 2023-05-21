@@ -26,7 +26,20 @@ public class StreamDemo {
         // sortOnAge();
 
        // stringToNumber();
-        flatStreamsOfStream();
+       // flatStreamsOfStream();
+
+        fetchEven();
+
+    }
+
+    private static void fetchEven() {
+        IntStream.range(10,200).boxed().forEach(x->{
+            if(x%2==0){
+                System.out.println(x);
+            }
+        });
+
+
     }
 
     private static void flatStreamsOfStream() {
@@ -202,4 +215,8 @@ public class StreamDemo {
 
         System.out.println(sum);
     }
+
+
+
+
 }

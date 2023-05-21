@@ -40,6 +40,8 @@ public class Employee implements Comparable{
 
 		List<Employee> sortedList= empList.stream().sorted().collect(Collectors.toList());
 		System.out.println(Arrays.toString(sortedList.toArray()));
+
+
 		}
 	
 	
